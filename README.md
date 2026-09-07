@@ -9,8 +9,8 @@ Manager (14,510 projects across 160 countries, 2013 to 2026) against every UN
 humanitarian response plan recorded by OCHA (532 plans across 111 countries,
 2014 to 2026, totalling about $400 billion requested).
 
-I map for HOT myself, mostly in Syria. This started as a question about my own
-volunteering.
+I started mapping for HOT about 2 months ago, mostly in Syria. This started as
+a question about what I had joined.
 
 ## What it found
 

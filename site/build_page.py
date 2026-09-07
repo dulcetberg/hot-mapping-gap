@@ -33,8 +33,8 @@ j = h.index('</header>', i) + len('</header>')
 h = h[:i] + f'''<header class="project-header">
       <span class="tag tag-civic">Humanitarian &mdash; Independent Study</span>
       <h1>{TITLE}</h1>
-      <p class="subtitle">I map for the Humanitarian OpenStreetMap Team, mostly in Syria, and wanted
-      to know where all of that volunteer effort goes in aggregate. Joining every project in the
+      <p class="subtitle">I started mapping for the Humanitarian OpenStreetMap Team about 2 months
+      ago, mostly in Syria, and wanted to know what I had joined. Joining every project in the
       Tasking Manager against every UN humanitarian appeal shows that volunteer mapping follows the
       size of an emergency up to a point, and then stops.</p>
       <div class="meta-row">
