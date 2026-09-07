@@ -70,7 +70,7 @@ h = h[:i] + f'''<div class="evidence-panel">
       <a class="btn btn-primary" href="{REPO}" target="_blank" rel="noopener">
         View the code <span class="visually-hidden">(opens in a new tab)</span>
       </a>
-      <a class="btn btn-outline" href="https://tasking-manager.hotosm.org/" target="_blank" rel="noopener">
+      <a class="btn btn-outline" href="https://tasks.hotosm.org/" target="_blank" rel="noopener">
         HOT Tasking Manager <span class="visually-hidden">(opens in a new tab)</span>
       </a>
     </div>''' + h[j:]

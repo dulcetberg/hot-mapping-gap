@@ -54,8 +54,8 @@ def choropleth(ax, g, col, cmap, title, sub, log=True, fmt=None):
     non.plot(ax=ax, color=GREY, edgecolor=PAPER, linewidth=0.3)
     has.plot(ax=ax, color=[cmap(norm(x)) for x in vals], edgecolor=PAPER, linewidth=0.3)
     ax.set_axis_off()
-    ax.set_title(title, loc="left", fontsize=15, fontweight="600", pad=6)
-    ax.text(0, 1.005, sub, transform=ax.transAxes, fontsize=10.5,
+    ax.set_title(title, loc="left", fontsize=20, fontweight="600", pad=6)
+    ax.text(0, 1.005, sub, transform=ax.transAxes, fontsize=13,
             color="#5c5750", va="bottom", ha="left")
 
     # colourbar drawn inside the empty Pacific, where the map has nothing to say
@@ -66,16 +66,16 @@ def choropleth(ax, g, col, cmap, title, sub, log=True, fmt=None):
     cb.set_ticks([norm(vals.min()), norm(vals.max())] if not log else [vals.min(), vals.max()])
     f = fmt or (lambda x: f"{x:,.0f}")
     cb.set_ticklabels([f(lo), f(hi)])
-    cb.ax.tick_params(labelsize=8, length=0)
+    cb.ax.tick_params(labelsize=11, length=0)
     cb.outline.set_visible(False)
     return ax
 
 
-def label(ax, g, iso, text, dx=0, dy=0, size=8.5):
+def label(ax, g, iso, text, dx=0, dy=0, size=11.5):
     row = g[g.iso3 == iso]
     if row.empty:
         return
     c = row.geometry.iloc[0].representative_point()
     ax.annotate(text, (c.x + dx, c.y + dy), fontsize=size, ha="center",
                 color=INK, fontweight="600",
-                path_effects=[pe.withStroke(linewidth=2.6, foreground=PAPER)])
+                path_effects=[pe.withStroke(linewidth=3.4, foreground=PAPER)])

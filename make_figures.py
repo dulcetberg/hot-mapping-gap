@@ -41,7 +41,7 @@ gg = g.merge(d[["score", "per_bn", "appeal_usd", "participations"]],
 has = gg[gg.score.notna()]
 non = gg[gg.score.isna()]
 
-fig, ax = plt.subplots(figsize=(13.5, 7.4))
+fig, ax = plt.subplots(figsize=(10.6, 5.95))
 norm = TwoSlopeNorm(vmin=d.score.min(), vcenter=mid, vmax=d.score.max())
 non.plot(ax=ax, color=GREY, edgecolor=PAPER, linewidth=0.3)
 has.plot(ax=ax, color=[DIV(norm(s)) for s in has.score],
@@ -51,34 +51,40 @@ ax.set_axis_off()
 # projection-dependent top margin, so set_title padding cannot be trusted
 # to clear the subtitle
 fig.text(0.022, 0.965, "Volunteer mapping does not follow the size of the emergency",
-         fontsize=17, fontweight="600", color=INK, va="top")
+         fontsize=21, fontweight="600", color=INK, va="top")
 fig.text(0.022, 0.918,
          "The 89 countries whose UN appeals since 2014 total $100 million or more, shaded by "
          "how much volunteer\nmapping each drew per billion dollars requested.",
-         fontsize=11, color="#5c5750", va="top", linespacing=1.55)
+         fontsize=13, color="#5c5750", va="top", linespacing=1.5)
 
-cax = ax.inset_axes([0.03, 0.10, 0.24, 0.030])
+cax = ax.inset_axes([0.03, 0.135, 0.27, 0.036])
 sm = plt.cm.ScalarMappable(cmap=DIV, norm=norm); sm.set_array([])
 cb = plt.colorbar(sm, cax=cax, orientation="horizontal")
 cb.set_ticks([d.score.min(), mid, d.score.max()])
 cb.set_ticklabels(["least mapped", "median", "most mapped"])
-cb.ax.tick_params(labelsize=8.5, length=0)
+cb.ax.tick_params(labelsize=11, length=0)
 cb.outline.set_visible(False)
-ax.text(0.03, 0.155, "mapping per $1B appealed", transform=ax.transAxes,
-        fontsize=9, color="#5c5750")
-ax.text(0.03, 0.055, "grey: no UN appeal, or one too small to compare",
-        transform=ax.transAxes, fontsize=8.5, color="#8a857d")
+ax.text(0.03, 0.175, "mapping per $1B appealed", transform=ax.transAxes,
+        fontsize=11.5, color="#5c5750")
+ax.text(0.03, 0.028, "grey: no UN appeal, or one too small to compare",
+        transform=ax.transAxes, fontsize=11, color="#8a857d")
 
+# offsets in projected metres, to pull apart labels that sit on top of
+# each other at this scale (Sudan against Yemen, Syria against Jordan)
+NUDGE = {"SYR": (-2.6e5, 3.4e5), "JOR": (3.0e5, -2.2e5),
+         "SDN": (-3.4e5, 1.0e5), "YEM": (5.2e5, -3.4e5),
+         "KEN": (4.4e5, -1.0e5), "NGA": (-2.0e5, 0)}
 for iso, t in [("SYR", "Syria"), ("YEM", "Yemen"), ("UKR", "Ukraine"),
                ("JOR", "Jordan"), ("AFG", "Afghanistan"), ("SDN", "Sudan"),
                ("COL", "Colombia"), ("MOZ", "Mozambique"), ("KEN", "Kenya"),
                ("NGA", "Nigeria")]:
-    label(ax, g, iso, t, dy=3.2e5 if iso == "SYR" else 0, size=9)
+    dx, dy = NUDGE.get(iso, (0, 0))
+    label(ax, g, iso, t, dx=dx, dy=dy, size=11.5)
 
 fig.text(0.5, 0.02,
          "Sources: UN OCHA Humanitarian Programme Cycle; HOT Tasking Manager. "
          "Equal Earth projection.  bergstromgis.com",
-         ha="center", fontsize=8.5, color="#6b665e")
+         ha="center", fontsize=10.5, color="#6b665e")
 fig.subplots_adjust(top=0.845, bottom=0.07, left=0.02, right=0.98)
 fig.savefig(os.path.join(FIGS, "fig1-gap-map.jpg"), dpi=155)
 plt.close(fig)
@@ -91,11 +97,11 @@ print("fig1 done")
 # it misstates the finding.
 from scipy import stats
 
-OFF = {"SYR": (8, 6), "YEM": (8, -13), "UKR": (-31, -13), "PSE": (8, 5),
-       "AFG": (8, -21), "IRQ": (9, 1), "SDN": (7, 8), "SOM": (-33, 5),
-       "LBN": (-33, -12), "JOR": (8, -4), "ETH": (7, -15), "COD": (8, 5),
-       "HND": (8, 2), "NPL": (-31, 6), "PHL": (6, 7), "MOZ": (9, -3),
-       "COL": (-33, 7)}
+OFF = {"SYR": (9, 4), "YEM": (9, -16), "UKR": (-35, -13), "PSE": (9, 4),
+       "AFG": (12, -18), "IRQ": (-33, -14), "SDN": (7, 9), "SOM": (-37, 4),
+       "LBN": (-37, -13), "JOR": (10, -6), "ETH": (10, 8), "COD": (9, 5),
+       "HND": (9, 1), "NPL": (7, -18), "PHL": (1, 10), "MOZ": (10, -5),
+       "COL": (-37, 6)}
 
 s = d.copy()
 s["y"] = s.participations.clip(lower=1.0)
@@ -104,11 +110,11 @@ hi = s[s.appeal_usd >= 1e9]
 r_lo, p_lo = stats.pearsonr(np.log10(lo.appeal_usd), np.log10(lo.y))
 r_hi, p_hi = stats.pearsonr(np.log10(hi.appeal_usd), np.log10(hi.y))
 
-fig, ax = plt.subplots(figsize=(11.8, 7.4))
+fig, ax = plt.subplots(figsize=(9.6, 6.4))
 ax.axvspan(1.0, 60, color="#f0e7e0", alpha=0.55, zorder=0)
-ax.scatter(lo.appeal_usd / 1e9, lo.y, s=44, c="#7aa8c4", edgecolor=PAPER,
+ax.scatter(lo.appeal_usd / 1e9, lo.y, s=58, c="#7aa8c4", edgecolor=PAPER,
            linewidth=0.7, zorder=3, label="appeal under $1B")
-ax.scatter(hi.appeal_usd / 1e9, hi.y, s=74, c="#b03a1a", edgecolor=PAPER,
+ax.scatter(hi.appeal_usd / 1e9, hi.y, s=96, c="#b03a1a", edgecolor=PAPER,
            linewidth=0.8, zorder=4, label="appeal of $1B or more")
 
 # fitted trend within each regime, drawn only across that regime's own range
@@ -123,35 +129,37 @@ for iso in ("SYR", "YEM", "UKR", "PSE", "JOR", "AFG", "COD", "SDN", "SOM",
             "HND", "NPL", "PHL", "MOZ", "COL", "IRQ", "LBN", "ETH"):
     if iso in s.index:
         r = s.loc[iso]
-        ax.annotate(iso, (r.appeal_usd / 1e9, r.y), fontsize=8.6,
-                    xytext=OFF.get(iso, (7, 4)), textcoords="offset points",
+        ax.annotate(iso, (r.appeal_usd / 1e9, r.y), fontsize=11.5,
+                    xytext=OFF.get(iso, (8, 5)), textcoords="offset points",
                     color="#3f3a34", fontweight="700", zorder=6,
-                    path_effects=[pe.withStroke(linewidth=2.4, foreground=PAPER)])
+                    path_effects=[pe.withStroke(linewidth=3.2, foreground=PAPER)])
 
 ax.set_xscale("log"); ax.set_yscale("log")
 ax.set_ylim(0.6, 2.4e5)
-ax.set_xlabel("UN appeal requirements, 2014 to 2026 (US$ billions, log scale)", fontsize=10.5)
-ax.set_ylabel("HOT project participations (log scale)", fontsize=10.5)
+ax.set_xlabel("UN appeal requirements, 2014 to 2026 (US$ billions, log scale)", fontsize=13)
+ax.set_ylabel("HOT project participations (log scale)", fontsize=13)
+ax.tick_params(labelsize=11.5)
 ax.grid(alpha=0.22, linewidth=0.6, color=RULE)
 ax.set_axisbelow(True)
 for sp in ("top", "right"):
     ax.spines[sp].set_visible(False)
 
 ax.text(0.055, 0.055, f"under $1B\nr = {r_lo:+.2f}, p = {p_lo:.3f}",
-        transform=ax.transAxes, fontsize=9.5, color="#2b6489", fontweight="600",
+        transform=ax.transAxes, fontsize=12, color="#2b6489", fontweight="600",
         linespacing=1.5)
 ax.text(0.80, 0.055, f"$1B and over\nr = {r_hi:+.2f}, p = {p_hi:.2f}",
-        transform=ax.transAxes, fontsize=9.5, color="#8c2d10", fontweight="600",
+        transform=ax.transAxes, fontsize=12, color="#8c2d10", fontweight="600",
         linespacing=1.5)
-ax.legend(frameon=False, fontsize=9.5, loc="upper left")
+ax.legend(frameon=False, fontsize=12, loc="lower left",
+          bbox_to_anchor=(0.30, -0.012))
 
 fig.text(0.012, 0.972, "Mapping tracks the emergency, until the emergency gets big",
-         fontsize=16, fontweight="600", color=INK, va="top")
+         fontsize=19.5, fontweight="600", color=INK, va="top")
 fig.text(0.012, 0.925,
          "Each dot is a country with a UN humanitarian appeal since 2014. Below $1 billion, bigger "
          "appeals draw more volunteer\nmapping. Among the 36 largest emergencies, shaded, that "
          "relationship disappears.",
-         fontsize=10.5, color="#5c5750", va="top", linespacing=1.5)
+         fontsize=12.5, color="#5c5750", va="top", linespacing=1.5)
 fig.subplots_adjust(top=0.845, bottom=0.085, left=0.075, right=0.985)
 fig.savefig(os.path.join(FIGS, "fig2-scatter.jpg"), dpi=155)
 plt.close(fig)
@@ -186,17 +194,17 @@ agg = pt.groupby("grp").apply(
                          "share": (d.proj > 0).mean(), "n": len(d)}),
     include_groups=False).sort_values("per_bn")
 
-fig, axes = plt.subplots(1, 2, figsize=(12.4, 4.5))
+fig, axes = plt.subplots(1, 2, figsize=(10.2, 4.3))
 cols = ["#b03a1a", "#c98a5e", "#2b6489"]
 for ax, col, ttl, f in [
         (axes[0], "per_bn", "Mapping drawn per $1B appealed", lambda v: f"{v:,.0f}"),
         (axes[1], "share", "Share of appeals drawing any mapping", lambda v: f"{v:.0%}")]:
     ax.barh(range(len(agg)), agg[col], color=cols, height=0.62)
     ax.set_yticks(range(len(agg)))
-    ax.set_yticklabels(agg.index, fontsize=9.5, linespacing=1.4)
-    ax.set_title(ttl, loc="left", fontsize=11.5, fontweight="600", pad=10)
+    ax.set_yticklabels(agg.index, fontsize=12, linespacing=1.4)
+    ax.set_title(ttl, loc="left", fontsize=14, fontweight="600", pad=10)
     for i, v in enumerate(agg[col]):
-        ax.text(v, i, "  " + f(v), va="center", fontsize=9.5, color="#4a453e", fontweight="600")
+        ax.text(v, i, "  " + f(v), va="center", fontsize=12.5, color="#4a453e", fontweight="600")
     ax.set_xticks([])
     for sp in ("top", "right", "bottom"):
         ax.spines[sp].set_visible(False)
@@ -204,11 +212,11 @@ for ax, col, ttl, f in [
     ax.set_xlim(0, agg[col].max() * 1.24)
 axes[1].set_yticklabels([])
 fig.suptitle("The kind of crisis predicts the response better than its size",
-             x=0.012, y=0.985, ha="left", fontsize=15.5, fontweight="600", color=INK)
+             x=0.012, y=0.985, ha="left", fontsize=18.5, fontweight="600", color=INK)
 fig.text(0.012, 0.895,
          f"Country-years with a UN appeal over $100 million, 2014 to 2026 (n = {int(agg.n.sum())}).",
-         fontsize=10, color="#5c5750", va="top")
-fig.subplots_adjust(top=0.70, bottom=0.06, left=0.155, right=0.985, wspace=0.08)
+         fontsize=12, color="#5c5750", va="top")
+fig.subplots_adjust(top=0.665, bottom=0.06, left=0.20, right=0.985, wspace=0.08)
 fig.savefig(os.path.join(FIGS, "fig3-plantype.jpg"), dpi=155)
 plt.close(fig)
 print("fig3 done")
