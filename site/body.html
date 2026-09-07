@@ -1,0 +1,149 @@
+<div class="project-body">
+    <p>
+      Most weeks I trace buildings and water infrastructure for the Humanitarian OpenStreetMap Team.
+      A lot of that work has been in Syria, mapping areas with contaminated water and soil. You sit
+      down, you pick a task square, you draw what the satellite shows, and somebody else checks it
+      afterwards. It is quiet, useful work, and it is easy to do it for years without ever asking
+      where all of it is going in aggregate.
+    </p>
+    <p>
+      So I asked. The Tasking Manager, which is the tool HOT uses to break mapping into squares that
+      volunteers can claim, has a public API. Every project since 2013 is in there, along with how
+      many people worked on it. The UN publishes something comparable from the other direction: every
+      humanitarian response plan it has issued, which country it covers, and how much money it asked
+      for.
+    </p>
+    <p>
+      Put those two together and you can ask a fairly blunt question. Volunteer attention is finite.
+      Does it go where the need is?
+    </p>
+
+    <h2>What is in the data</h2>
+    <p>
+      14,510 mapping projects across 160 countries, from 2013 to the present, representing 1,405,270
+      project participations. That last number needs a caveat straight away: the Tasking Manager
+      counts contributors per project, so a volunteer who maps five projects is counted five times.
+      It measures work done, not people. I call it a project participation throughout rather than
+      pretend otherwise.
+    </p>
+    <p>
+      On the other side, 532 UN humanitarian response plans covering 111 countries since 2014, asking
+      for roughly 400 billion dollars between them.
+    </p>
+
+    <h2>The finding</h2>
+    <p>
+      Across the whole range, mapping does follow money. Countries with bigger appeals get more
+      volunteer mapping, and the correlation is strong and clearly significant.
+    </p>
+    <p>
+      Then you look only at the large emergencies, and it stops. Among the 36 countries that have
+      appealed for a billion dollars or more since 2014, the relationship between the size of the
+      appeal and the amount of volunteer mapping is gone. The correlation is slightly negative and
+      nowhere near significant.
+    </p>
+    <p>
+      Syria has asked for 39 billion dollars and drawn 11,949 project participations. Yemen has asked
+      for 36 billion and drawn 2,943. Honduras has asked for 1.1 billion and drawn 28,512, most of
+      them in a single year. Ukraine, through the largest displacement crisis in Europe since the
+      Second World War, has 10 mapping projects in the Tasking Manager. Not 10 in a bad year. 10 in
+      total, ever.
+    </p>
+    <p>
+      What that shape describes is a ceiling. Volunteer mapping scales with the emergency up to a
+      point and then saturates, which means the very largest crises are precisely the ones where
+      volunteer effort covers the smallest fraction of what is needed.
+    </p>
+
+
+    <div class="media-inner">
+      <img src="../images/hot-gap-scatter.jpg" alt="Scatter plot of UN appeal size against HOT project participations for every country with a humanitarian appeal since 2014. Below one billion dollars the fitted trend rises; above it, among the 36 largest emergencies, the trend is flat.">
+    </div>
+    <p>
+      Each dot is a country. Below a billion dollars the trend line rises, so bigger appeals do draw
+      more volunteers. Inside the shaded band, among the largest emergencies in the world, the line
+      goes flat.
+    </p>
+
+    <h2>How concentrated it is</h2>
+    <p>
+      The top 20 countries account for 60 percent of all project participations. The least-mapped
+      half of the 160 mapped countries account for 3.2 percent between them. And 63 countries that
+      have never had a UN appeal at all still hold 16 percent of the total effort, which is a
+      reminder that a good deal of this work is long-run development mapping rather than emergency
+      response, and was never meant to track appeals in the first place.
+    </p>
+
+    <h2>The explanation I was confident about, and could not support</h2>
+    <p>
+      My first instinct was that this is a conflict problem. Volunteers turn out for earthquakes and
+      floods, where the damage is visible from orbit and bounded in time, and stay away from wars,
+      where mapping buildings can amount to producing targeting data and where nobody can safely
+      check the work on the ground. Ukraine and Syria seemed to make the case on their own.
+    </p>
+    <p>
+      OCHA labels every appeal with a plan type, so there is a way to test that without me sorting
+      countries into buckets myself, which would have let me find whatever I went looking for. Flash
+      appeals are sudden onset. Response plans are protracted crises. Regional plans are for people
+      who have already fled somewhere else.
+    </p>
+    <p>
+      Sudden-onset emergencies do draw more mapping per dollar than protracted ones. But the
+      difference is not statistically significant, and the share of appeals drawing any mapping at
+      all is 80 percent against 78 percent, which is no difference worth discussing.
+    </p>
+
+    <div class="media-inner">
+      <img src="../images/hot-gap-plantype.jpg" alt="Two bar charts comparing mapping drawn per billion dollars appealed and the share of appeals drawing any mapping, split by OCHA plan type: sudden-onset disaster, people who fled, and protracted crisis.">
+    </div>
+    <p>
+      Sudden-onset emergencies draw more mapping per dollar, but 25 flash appeals is a small sample
+      and the difference does not clear significance. The refugee-plan gap in the right-hand chart is
+      the one that looked convincing until high-income countries came out of it.
+    </p>
+    <p>
+      Refugee-hosting appeals looked like a much stronger result, with barely half drawing any
+      mapping. That one fell apart when I looked harder. The regional refugee plans include Poland,
+      Hungary, Czechia and the Baltic states, wealthy countries hosting Ukrainian refugees whose maps
+      have been complete for years. They are not evidence of neglect. Dropping high-income countries
+      took the result from convincing to not significant.
+    </p>
+    <p>
+      So the tidy version of this story is not in the data, and I have left the failed test in the
+      repository next to the ones that worked. The saturation finding survives all of that. The
+      explanation for it does not come from this dataset, and I would rather say so than reach.
+    </p>
+
+    <h2>A note on getting the dates</h2>
+    <p>
+      The Tasking Manager will not tell you when a project was created unless you ask for that
+      project specifically, and each of those replies is about 90KB. Doing that 14,702 times means
+      pulling well over a gigabyte off a nonprofit's API to read one field, which is a rude way to
+      run a hobby project.
+    </p>
+    <p>
+      Project IDs are handed out in order, so I sampled 204 real creation dates spread across the
+      whole range of IDs, confirmed the relationship never runs backwards, and interpolated
+      everything else. To check it, I pulled 60 more projects the fit had never seen. Median error
+      0.33 days, worst case 5.5 days, which is far more precision than a question measured in years
+      requires.
+    </p>
+
+    <h2>What I would not claim from this</h2>
+    <p>
+      The Tasking Manager is not all humanitarian mapping. Bilateral projects, partner work and
+      national mapping agencies do not appear in it, and a country can be well mapped through
+      channels this data cannot see.
+    </p>
+    <p>
+      Appeal dollars are also a rough proxy for how much a place needs a map. Indonesia is the
+      clearest case: a 50 million dollar appeal against 77,265 project participations, because
+      middle-income countries with real disaster agencies handle their own earthquakes without asking
+      the UN for money. Countries appealing for under 100 million dollars are held out of the
+      per-dollar comparisons for that reason.
+    </p>
+    <p>
+      None of this is a complaint about the volunteers. It is a description of what a volunteer
+      system does when it meets an emergency larger than volunteering can absorb, which seems worth
+      knowing if you are one of the volunteers.
+    </p>

@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Where Humanitarian Mapping Happens — Brian Bergstrom</title>
+<meta name="description" content="Joining 14,510 volunteer mapping projects against every UN humanitarian appeal since 2014 shows that volunteer mapping tracks the size of an emergency only up to a point. Among the 36 largest crises, the relationship disappears.">
+<link rel="canonical" href="https://bergstromgis.com/work/hot-mapping-gap.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Brian Bergstrom">
+<meta property="og:title" content="Where Humanitarian Mapping Happens — Brian Bergstrom">
+<meta property="og:description" content="Joining 14,510 volunteer mapping projects against every UN humanitarian appeal since 2014 shows that volunteer mapping tracks the size of an emergency only up to a point. Among the 36 largest crises, the relationship disappears.">
+<meta property="og:image" content="https://bergstromgis.com/images/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Brian Bergstrom — GIS that makes the overlooked undeniable.">
+<meta property="og:url" content="https://bergstromgis.com/work/hot-mapping-gap.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Where Humanitarian Mapping Happens — Brian Bergstrom">
+<meta name="twitter:description" content="Joining 14,510 volunteer mapping projects against every UN humanitarian appeal since 2014 shows that volunteer mapping tracks the size of an emergency only up to a point. Among the 36 largest crises, the relationship disappears.">
+<meta name="twitter:image" content="https://bergstromgis.com/images/og-image.png">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="alternate icon" href="../favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="stylesheet" href="../css/brand.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <nav class="site-nav container" aria-label="Primary">
+    <a class="wordmark" href="../index.html">Brian Bergstrom</a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks">Menu</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../work-civic.html">Work</a></li>
+      <li><a href="../blog.html">Blog</a></li>
+      <li><a href="../about.html">About</a></li>
+      <li><a href="../../resume/resume.html">Resume</a></li>
+      <li><a href="../ai-use.html">AI Use</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="redmap" color-interpolation-filters="sRGB">
+    <feColorMatrix type="matrix" values="0.33 0.33 0.33 0 0  0.33 0.33 0.33 0 0  0.33 0.33 0.33 0 0  0 0 0 1 0" result="gray"/>
+    <feComponentTransfer in="gray" result="normalized">
+      <feFuncR type="linear" slope="11.087" intercept="-3.348"/>
+      <feFuncG type="linear" slope="11.087" intercept="-3.348"/>
+      <feFuncB type="linear" slope="11.087" intercept="-3.348"/>
+    </feComponentTransfer>
+    <feComponentTransfer in="normalized">
+      <feFuncR type="table" tableValues="0.02 0.18 0.45 0.75 1.0"/>
+      <feFuncG type="table" tableValues="0.00 0.015 0.04 0.10 0.30"/>
+      <feFuncB type="table" tableValues="0.00 0.015 0.03 0.07 0.22"/>
+    </feComponentTransfer>
+  </filter>
+</svg>
+
+<main id="main">
+  <section class="site-hero">
+    <div class="hero-base"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-lines"></div>
+    <div class="hero-vignette"></div>
+    <svg class="hero-sparkles">
+      <defs>
+        <radialGradient id="sparkGrad">
+          <stop offset="0%" stop-color="#FFEFD6" stop-opacity="1"/>
+          <stop offset="35%" stop-color="#FFB199" stop-opacity="0.9"/>
+          <stop offset="100%" stop-color="#C0392B" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <circle class="sparkle" data-sx="211" data-sy="414" r="3.4" fill="url(#sparkGrad)" style="animation-delay:-0.2s; animation-duration:2.3s;"/>
+      <circle class="sparkle" data-sx="988" data-sy="388" r="3.0" fill="url(#sparkGrad)" style="animation-delay:-1.4s; animation-duration:2.9s;"/>
+      <circle class="sparkle" data-sx="634" data-sy="539" r="3.6" fill="url(#sparkGrad)" style="animation-delay:-0.8s; animation-duration:2.5s;"/>
+      <circle class="sparkle" data-sx="849" data-sy="449" r="3.1" fill="url(#sparkGrad)" style="animation-delay:-2.1s; animation-duration:3.1s;"/>
+      <circle class="sparkle" data-sx="1077" data-sy="463" r="3.5" fill="url(#sparkGrad)" style="animation-delay:-0.5s; animation-duration:2.4s;"/>
+      <circle class="sparkle" data-sx="1260" data-sy="552" r="3.0" fill="url(#sparkGrad)" style="animation-delay:-1.8s; animation-duration:2.8s;"/>
+      <circle class="sparkle" data-sx="1745" data-sy="527" r="4.0" fill="url(#sparkGrad)" style="animation-delay:-1.0s; animation-duration:2.6s;"/>
+      <circle class="sparkle" data-sx="965" data-sy="561" r="3.2" fill="url(#sparkGrad)" style="animation-delay:-2.4s; animation-duration:3.0s;"/>
+      <circle class="sparkle" data-sx="1169" data-sy="592" r="3.3" fill="url(#sparkGrad)" style="animation-delay:-0.1s; animation-duration:2.7s;"/>
+      <circle class="sparkle" data-sx="1262" data-sy="617" r="3.6" fill="url(#sparkGrad)" style="animation-delay:-1.6s; animation-duration:2.5s;"/>
+      <circle class="sparkle" data-sx="1060" data-sy="835" r="3.1" fill="url(#sparkGrad)" style="animation-delay:-0.9s; animation-duration:2.9s;"/>
+      <circle class="sparkle" data-sx="1135" data-sy="816" r="3.4" fill="url(#sparkGrad)" style="animation-delay:-2.0s; animation-duration:2.6s;"/>
+    </svg>
+    <svg class="hero-corner" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="46" fill="none" stroke="#FF6A52" stroke-width="5" stroke-linecap="round" stroke-dasharray="255 40" transform="rotate(-58 60 60)" /></svg>
+    <div class="hero-content">
+      <span class="eyebrow">GIS Analyst &middot; Chicago</span>
+      <p class="hero-title">GIS that makes the overlooked undeniable.</p>
+      <p class="lede">Real maps, real data, real people who needed someone to notice. New ones posted here roughly every week.</p>
+    </div>
+  </section>
+
+  <div class="blog-layout container">
+  <div class="blog-main">
+    <div class="container">
+    <a class="breadcrumb" href="../work-civic.html">&larr; Back to civic work</a>
+
+    <header class="project-header">
+      <span class="tag tag-civic">Humanitarian &mdash; Independent Study</span>
+      <h1>Where Humanitarian Mapping Happens</h1>
+      <p class="subtitle">I map for the Humanitarian OpenStreetMap Team, mostly in Syria, and wanted
+      to know where all of that volunteer effort goes in aggregate. Joining every project in the
+      Tasking Manager against every UN humanitarian appeal shows that volunteer mapping follows the
+      size of an emergency up to a point, and then stops.</p>
+      <div class="meta-row">
+        <span class="stat">14,510 mapping projects, 160 countries, 2013&ndash;2026</span>
+        <span class="stat">532 UN appeals worth $400 billion</span>
+        <span class="stat">1,405,270 project participations</span>
+      </div>
+    </header>
+  </div>
+
+  <div class="project-hero-media">
+    <div class="media-inner">
+      <img src="../images/hot-mapping-gap.jpg" alt="World map on the Equal Earth projection showing countries with UN humanitarian appeals shaded by how much volunteer mapping they drew per billion dollars requested. Ukraine, eastern Europe, Syria, Jordan, Afghanistan and Yemen are the least mapped.">
+    </div>
+  </div>
+
+  <div class="project-body">
+    <p>
+      Most weeks I trace buildings and water infrastructure for the Humanitarian OpenStreetMap Team.
+      A lot of that work has been in Syria, mapping areas with contaminated water and soil. You sit
+      down, you pick a task square, you draw what the satellite shows, and somebody else checks it
+      afterwards. It is quiet, useful work, and it is easy to do it for years without ever asking
+      where all of it is going in aggregate.
+    </p>
+    <p>
+      So I asked. The Tasking Manager, which is the tool HOT uses to break mapping into squares that
+      volunteers can claim, has a public API. Every project since 2013 is in there, along with how
+      many people worked on it. The UN publishes something comparable from the other direction: every
+      humanitarian response plan it has issued, which country it covers, and how much money it asked
+      for.
+    </p>
+    <p>
+      Put those two together and you can ask a fairly blunt question. Volunteer attention is finite.
+      Does it go where the need is?
+    </p>
+
+    <h2>What is in the data</h2>
+    <p>
+      14,510 mapping projects across 160 countries, from 2013 to the present, representing 1,405,270
+      project participations. That last number needs a caveat straight away: the Tasking Manager
+      counts contributors per project, so a volunteer who maps five projects is counted five times.
+      It measures work done, not people. I call it a project participation throughout rather than
+      pretend otherwise.
+    </p>
+    <p>
+      On the other side, 532 UN humanitarian response plans covering 111 countries since 2014, asking
+      for roughly 400 billion dollars between them.
+    </p>
+
+    <h2>The finding</h2>
+    <p>
+      Across the whole range, mapping does follow money. Countries with bigger appeals get more
+      volunteer mapping, and the correlation is strong and clearly significant.
+    </p>
+    <p>
+      Then you look only at the large emergencies, and it stops. Among the 36 countries that have
+      appealed for a billion dollars or more since 2014, the relationship between the size of the
+      appeal and the amount of volunteer mapping is gone. The correlation is slightly negative and
+      nowhere near significant.
+    </p>
+    <p>
+      Syria has asked for 39 billion dollars and drawn 11,949 project participations. Yemen has asked
+      for 36 billion and drawn 2,943. Honduras has asked for 1.1 billion and drawn 28,512, most of
+      them in a single year. Ukraine, through the largest displacement crisis in Europe since the
+      Second World War, has 10 mapping projects in the Tasking Manager. Not 10 in a bad year. 10 in
+      total, ever.
+    </p>
+    <p>
+      What that shape describes is a ceiling. Volunteer mapping scales with the emergency up to a
+      point and then saturates, which means the very largest crises are precisely the ones where
+      volunteer effort covers the smallest fraction of what is needed.
+    </p>
+
+
+    <div class="media-inner">
+      <img src="../images/hot-gap-scatter.jpg" alt="Scatter plot of UN appeal size against HOT project participations for every country with a humanitarian appeal since 2014. Below one billion dollars the fitted trend rises; above it, among the 36 largest emergencies, the trend is flat.">
+    </div>
+    <p>
+      Each dot is a country. Below a billion dollars the trend line rises, so bigger appeals do draw
+      more volunteers. Inside the shaded band, among the largest emergencies in the world, the line
+      goes flat.
+    </p>
+
+    <h2>How concentrated it is</h2>
+    <p>
+      The top 20 countries account for 60 percent of all project participations. The least-mapped
+      half of the 160 mapped countries account for 3.2 percent between them. And 63 countries that
+      have never had a UN appeal at all still hold 16 percent of the total effort, which is a
+      reminder that a good deal of this work is long-run development mapping rather than emergency
+      response, and was never meant to track appeals in the first place.
+    </p>
+
+    <h2>The explanation I was confident about, and could not support</h2>
+    <p>
+      My first instinct was that this is a conflict problem. Volunteers turn out for earthquakes and
+      floods, where the damage is visible from orbit and bounded in time, and stay away from wars,
+      where mapping buildings can amount to producing targeting data and where nobody can safely
+      check the work on the ground. Ukraine and Syria seemed to make the case on their own.
+    </p>
+    <p>
+      OCHA labels every appeal with a plan type, so there is a way to test that without me sorting
+      countries into buckets myself, which would have let me find whatever I went looking for. Flash
+      appeals are sudden onset. Response plans are protracted crises. Regional plans are for people
+      who have already fled somewhere else.
+    </p>
+    <p>
+      Sudden-onset emergencies do draw more mapping per dollar than protracted ones. But the
+      difference is not statistically significant, and the share of appeals drawing any mapping at
+      all is 80 percent against 78 percent, which is no difference worth discussing.
+    </p>
+
+    <div class="media-inner">
+      <img src="../images/hot-gap-plantype.jpg" alt="Two bar charts comparing mapping drawn per billion dollars appealed and the share of appeals drawing any mapping, split by OCHA plan type: sudden-onset disaster, people who fled, and protracted crisis.">
+    </div>
+    <p>
+      Sudden-onset emergencies draw more mapping per dollar, but 25 flash appeals is a small sample
+      and the difference does not clear significance. The refugee-plan gap in the right-hand chart is
+      the one that looked convincing until high-income countries came out of it.
+    </p>
+    <p>
+      Refugee-hosting appeals looked like a much stronger result, with barely half drawing any
+      mapping. That one fell apart when I looked harder. The regional refugee plans include Poland,
+      Hungary, Czechia and the Baltic states, wealthy countries hosting Ukrainian refugees whose maps
+      have been complete for years. They are not evidence of neglect. Dropping high-income countries
+      took the result from convincing to not significant.
+    </p>
+    <p>
+      So the tidy version of this story is not in the data, and I have left the failed test in the
+      repository next to the ones that worked. The saturation finding survives all of that. The
+      explanation for it does not come from this dataset, and I would rather say so than reach.
+    </p>
+
+    <h2>A note on getting the dates</h2>
+    <p>
+      The Tasking Manager will not tell you when a project was created unless you ask for that
+      project specifically, and each of those replies is about 90KB. Doing that 14,702 times means
+      pulling well over a gigabyte off a nonprofit's API to read one field, which is a rude way to
+      run a hobby project.
+    </p>
+    <p>
+      Project IDs are handed out in order, so I sampled 204 real creation dates spread across the
+      whole range of IDs, confirmed the relationship never runs backwards, and interpolated
+      everything else. To check it, I pulled 60 more projects the fit had never seen. Median error
+      0.33 days, worst case 5.5 days, which is far more precision than a question measured in years
+      requires.
+    </p>
+
+    <h2>What I would not claim from this</h2>
+    <p>
+      The Tasking Manager is not all humanitarian mapping. Bilateral projects, partner work and
+      national mapping agencies do not appear in it, and a country can be well mapped through
+      channels this data cannot see.
+    </p>
+    <p>
+      Appeal dollars are also a rough proxy for how much a place needs a map. Indonesia is the
+      clearest case: a 50 million dollar appeal against 77,265 project participations, because
+      middle-income countries with real disaster agencies handle their own earthquakes without asking
+      the UN for money. Countries appealing for under 100 million dollars are held out of the
+      per-dollar comparisons for that reason.
+    </p>
+    <p>
+      None of this is a complaint about the volunteers. It is a description of what a volunteer
+      system does when it meets an emergency larger than volunteering can absorb, which seems worth
+      knowing if you are one of the volunteers.
+    </p>
+
+    <div class="evidence-panel">
+      <p>The harvest, the statistics including the hypothesis that failed, and the figure code are
+      all in the repository.</p>
+      <a class="btn btn-primary" href="https://github.com/dulcetberg/hot-mapping-gap" target="_blank" rel="noopener">
+        View the code <span class="visually-hidden">(opens in a new tab)</span>
+      </a>
+      <a class="btn btn-outline" href="https://tasking-manager.hotosm.org/" target="_blank" rel="noopener">
+        HOT Tasking Manager <span class="visually-hidden">(opens in a new tab)</span>
+      </a>
+    </div>
+  </div>
+    </div>
+
+    <aside class="blog-sidebar" aria-label="Search and browse by date">
+      <div class="sidebar-panel">
+        <h2>Search posts</h2>
+        <form class="search-field" id="sidebarSearchForm">
+          <label class="visually-hidden" for="blogSearch">Search posts</label>
+          <input type="search" id="blogSearch" name="q" placeholder="Search titles, tags, topics…">
+          <button type="submit" class="search-submit" aria-label="Search">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 4a6 6 0 104.472 10.03l4.749 4.748 1.414-1.414-4.748-4.749A6 6 0 0010 4zm-4 6a4 4 0 118 0 4 4 0 01-8 0z"/></svg>
+          </button>
+        </form>
+        <p class="search-status" id="searchStatus" hidden></p>
+      </div>
+
+      <div class="sidebar-panel">
+        <h2>Browse by date</h2>
+        <div class="cal-head">
+          <button class="cal-nav" id="calPrev" type="button" aria-label="Previous month">&larr;</button>
+          <span class="cal-label" id="calLabel"></span>
+          <button class="cal-nav" id="calNext" type="button" aria-label="Next month">&rarr;</button>
+        </div>
+        <div class="cal-grid" id="calGrid" role="grid" aria-label="Post dates"></div>
+        <button class="cal-clear" id="calClear" type="button" hidden>Clear date filter</button>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <svg class="footer-mark" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="46" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-dasharray="255 40" transform="rotate(-58 60 60)" /></svg>
+    <p class="footer-note">&copy; <a href="mailto:brian@bergstromgis.com">Brian Bergstrom</a>. Built by Claude, hosted on GitHub Pages.</p>
+  </div>
+</footer>
+
+<script>
+  document.documentElement.classList.add('js-ready');
+  var toggle = document.getElementById('navToggle');
+  var links = document.getElementById('navLinks');
+  toggle.addEventListener('click', function () {
+    var open = links.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+</script>
+<script src="../js/hero-sparkles.js"></script>
+<script src="../js/blog-post-data.js"></script>
+<script src="../js/blog-sidebar.js"></script>
+</body>
+</html>
